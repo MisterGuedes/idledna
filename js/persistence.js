@@ -1,34 +1,5 @@
 import { SAVE_KEY } from "./data/config.js";
 
-export function defaultState() {
-  return {
-    dna: 0,
-    totalDNA: 0,
-    taps: 0,
-    choices: 0,
-    nextMilestone: 50,
-    parts: {},
-    shop: {},
-    boostUntil: 0,
-    boostType: null,
-    lastSeen: Date.now()
-  };
-}
-
-export function loadState() {
-  try {
-    const saved = JSON.parse(localStorage.getItem(SAVE_KEY));
-    return Object.assign(defaultState(), saved || {}, {
-      parts: saved?.parts || {},
-      shop: saved?.shop || {},
-      lastSeen: Number(saved?.lastSeen) || Date.now()
-    });
-  } catch {
-    return defaultState();
-  }
-}
-
-export function saveState(state) {
-  state.lastSeen = Date.now();
-  localStorage.setItem(SAVE_KEY, JSON.stringify(state));
-}
+export function defaultState(){return {dna:0,totalDNA:0,taps:0,choices:0,nextMilestone:50,parts:{},shop:{},boostUntil:0,boostType:null,essence:0,totalEssence:0,rebirths:0,prestige:{memory:0,catalyst:0,instinct:0,efficiency:0},lastSeen:Date.now()}}
+export function loadState(){try{const saved=JSON.parse(localStorage.getItem(SAVE_KEY));const d=defaultState(),s=Object.assign(d,saved||{});s.parts=saved?.parts||{};s.shop=saved?.shop||{};s.prestige=Object.assign({},d.prestige,saved?.prestige||{});s.essence=Number(s.essence)||0;s.totalEssence=Number(s.totalEssence)||0;s.rebirths=Number(s.rebirths)||0;s.lastSeen=Number(saved?.lastSeen)||Date.now();return s}catch{return defaultState()}}
+export function saveState(state){state.lastSeen=Date.now();localStorage.setItem(SAVE_KEY,JSON.stringify(state))}
