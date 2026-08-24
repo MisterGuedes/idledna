@@ -1,15 +1,1 @@
-.tapTarget{width:min(86vw,390px);height:min(58vh,390px);max-height:420px;min-height:250px;border-radius:42%;
-  display:flex;align-items:center;justify-content:center;position:relative;touch-action:manipulation;user-select:none}
-.tapTarget:active{transform:scale(.975)}
-#creature{width:100%;height:100%;overflow:visible}
-.tapHint{position:absolute;bottom:2%;font-size:11px;color:#70809e;letter-spacing:.08em;text-transform:uppercase;pointer-events:none}
-.float{position:absolute;pointer-events:none;font-weight:900;color:var(--accent);font-size:18px;animation:floatUp .75s ease-out forwards;z-index:4}
-@keyframes floatUp{0%{opacity:1;transform:translate(-50%,0) scale(.9)}100%{opacity:0;transform:translate(-50%,-70px) scale(1.15)}}
-.pulse{animation:creaturePulse .3s ease-out}
-@keyframes creaturePulse{0%{transform:scale(1)}45%{transform:scale(1.035,.965)}100%{transform:scale(1)}}
-.wobble{animation:wobble 3.5s ease-in-out infinite}
-@keyframes wobble{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-5px) rotate(1deg)}}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.bigTap{height:54px;border-radius:17px;background:linear-gradient(135deg,#6ff0c0,#7197ff);color:#07101c;font-weight:950;font-size:16px;box-shadow:0 7px 22px #6ff0c033}
-.shopOpen{height:54px;border-radius:17px;background:var(--panel);border:1px solid var(--line);font-weight:800}
-.boost{margin-top:7px;height:40px;width:100%;border-radius:13px;background:#1b2742;border:1px solid #344563;color:#dce7ff;font-size:12px}
+.tapTarget{width:min(86vw,390px);height:min(58vh,390px);max-height:420px;min-height:250px;border-radius:42%;display:flex;align-items:center;justify-content:center;position:relative;touch-action:manipulation;user-select:none}.tapTarget:active{transform:scale(.975)}#creature{width:100%;height:100%;overflow:visible}.tapHint{position:absolute;bottom:2%;font-size:11px;color:#70809e;letter-spacing:.08em;text-transform:uppercase;pointer-events:none}.pulse{animation:creaturePulse .3s ease-out}@keyframes creaturePulse{0%{transform:scale(1)}45%{transform:scale(1.035,.965)}100%{transform:scale(1)}}.wobble{animation:wobble 3.5s ease-in-out infinite}@keyframes wobble{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-5px) rotate(1deg)}}.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.shopOpen{height:54px;border-radius:17px;background:var(--panel);border:1px solid var(--line);font-weight:800}
