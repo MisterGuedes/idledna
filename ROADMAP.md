@@ -6,12 +6,13 @@
 - [x] Evolution Shop upgrades
 - [x] Upgrade scaling and level display
 - [x] Mutation mastery progression
+- [x] Upgrade milestone bonuses
 
 ## Phase 2 — Discovery & Variety
 - [x] Evolution choice events
 - [x] Mutation Fusion
 - [x] Random Evolution Events
-- [ ] Evolution Worlds
+- [x] Evolution Worlds foundation + production modifiers
 - [ ] Mutation Laboratory
 - [ ] Event chains and rare events
 
@@ -26,7 +27,7 @@
 - [x] Genetic Ascension
 - [ ] Permanent Genome tree
 - [ ] Ascension-exclusive mutations
-- [ ] Higher-tier worlds
+- [ ] Higher-tier world content
 - [ ] Endgame progression
 
 ## Phase 5 — Meta & Polish
@@ -39,4 +40,7 @@
 - [ ] Save/export/import tools
 
 ### Current focus
-**Individual Upgrade Levels & Mutation Mastery** — make every upgrade and mutation a long-term investment with escalating costs, visible levels, mastery milestones, and meaningful progression.
+**Evolution Worlds** — multiple habitats with permanent unlocks, production modifiers, and distinct progression goals.
+
+### Next focus
+**Mutation Laboratory + Event Chains** — turn discovered mutations into experiments and make random events connect into multi-stage stories with lasting consequences.
