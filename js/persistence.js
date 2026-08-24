@@ -10,7 +10,8 @@ export function defaultState() {
     parts: {},
     shop: {},
     boostUntil: 0,
-    boostType: null
+    boostType: null,
+    lastSeen: Date.now()
   };
 }
 
@@ -19,7 +20,8 @@ export function loadState() {
     const saved = JSON.parse(localStorage.getItem(SAVE_KEY));
     return Object.assign(defaultState(), saved || {}, {
       parts: saved?.parts || {},
-      shop: saved?.shop || {}
+      shop: saved?.shop || {},
+      lastSeen: Number(saved?.lastSeen) || Date.now()
     });
   } catch {
     return defaultState();
@@ -27,5 +29,6 @@ export function loadState() {
 }
 
 export function saveState(state) {
+  state.lastSeen = Date.now();
   localStorage.setItem(SAVE_KEY, JSON.stringify(state));
 }
