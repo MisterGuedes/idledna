@@ -1,4 +1,5 @@
 import { SHOP } from "./data/upgrades.js";
+import { MUTATIONS } from "./data/mutations.js";
 import { saveState } from "./persistence.js";
 
 let state = null;
@@ -15,9 +16,29 @@ function fmt(n){
 }
 export function setShopContext(nextState,rerender,showToast){state=nextState;renderUI=rerender;toast=showToast}
 function shopCost(s){return s.base*Math.pow(1.15,state.shop[s.id]||0)}
+function mutationUpgradeCost(m,tier){return Math.ceil(50*Math.pow(3,Math.max(0,tier-1))*(m.rarity==="uncommon"?1.5:m.rarity==="rare"?3:1))}
+
+function renderMutationUpgrades(){
+ const owned=Object.values(state.parts);
+ if(!owned.length)return `<div class="card"><div class="cardTop"><div><h3>Mutations</h3><p>Unlock mutations through evolution events, then strengthen them individually here.</p></div></div></div>`;
+ return `<div class="card mutationSection"><div class="cardTop"><div><h3>Mutation Upgrades</h3><p>Improve each adaptation independently. Higher tiers increase its DNA/sec and DNA/tap bonuses.</p></div></div>${owned.map(p=>{
+   const m=MUTATIONS.find(x=>x.id===p.id);if(!m)return "";
+   const tier=p.tier||1,max=25,cost=mutationUpgradeCost(m,tier),locked=tier>=max;
+   return `<div class="mutationUpgrade"><div><strong>${m.name}</strong><div class="mutLevel">Tier ${tier}/${max}</div><div class="mutBonus">+${fmt(m.dps*tier)} DNA/sec • +${fmt(m.tap*tier)} DNA/tap</div></div><button class="buy mutationBuy" data-mutation-upgrade="${m.id}" ${locked||state.dna<cost?"disabled":""}>${locked?"MAXED":"Upgrade • "+fmt(cost)+" DNA"}</button></div>`;
+ }).join("")}</div>`;
+}
+
 export function renderShop(){
  const list=$("shopList");if(!list)return;
- list.innerHTML=SHOP.map(s=>{const l=state.shop[s.id]||0,cost=shopCost(s),locked=s.requires&&!state.parts[s.requires];return `<div class="card"><div class="cardTop"><div><h3>${s.name}</h3><p>${s.desc}</p></div><div class="level">LV ${l}${s.max<Infinity?"/"+s.max:""}</div></div><p style="margin-top:8px;color:#b7c5df">${s.effect}</p><button class="buy" data-shop="${s.id}" ${locked||l>=s.max||state.dna<cost?"disabled":""}>${locked?"Requires Insectoid Legs":l>=s.max?"MAXED":"Buy • "+fmt(cost)+" DNA"}</button></div>`}).join("");
+ list.innerHTML=renderMutationUpgrades()+SHOP.map(s=>{const l=state.shop[s.id]||0,cost=shopCost(s),locked=s.requires&&!state.parts[s.requires];return `<div class="card"><div class="cardTop"><div><h3>${s.name}</h3><p>${s.desc}</p></div><div class="level">LV ${l}${s.max<Infinity?"/"+s.max:""}</div></div><p style="margin-top:8px;color:#b7c5df">${s.effect}</p><button class="buy" data-shop="${s.id}" ${locked||l>=s.max||state.dna<cost?"disabled":""}>${locked?"Requires Insectoid Legs":l>=s.max?"MAXED":"Buy • "+fmt(cost)+" DNA"}</button></div>`}).join("");
  document.querySelectorAll("[data-shop]").forEach(b=>b.addEventListener("click",()=>buyShop(b.dataset.shop)));
+ document.querySelectorAll("[data-mutation-upgrade]").forEach(b=>b.addEventListener("click",()=>upgradeMutation(b.dataset.mutationUpgrade)));
 }
 function buyShop(id){const s=SHOP.find(x=>x.id===id);if(!s)return;const l=state.shop[id]||0,c=shopCost(s);if(l>=s.max||state.dna<c||(s.requires&&!state.parts[s.requires]))return;state.dna-=c;state.shop[id]=l+1;saveState(state);renderUI();toast(s.name+" upgraded to Lv "+(l+1))}
+function upgradeMutation(id){
+ const m=MUTATIONS.find(x=>x.id===id),p=state.parts[id];if(!m||!p)return;
+ const tier=p.tier||1,max=25,cost=mutationUpgradeCost(m,tier);
+ if(tier>=max||state.dna<cost)return;
+ state.dna-=cost;p.tier=tier+1;
+ saveState(state);renderUI();toast(m.name+" upgraded to Tier "+p.tier);
+}
