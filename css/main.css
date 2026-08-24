@@ -1,0 +1,28 @@
+:root{
+  --bg:#0a0f1d;--panel:#121a2c;--panel2:#17213a;--line:#293654;
+  --text:#eef4ff;--muted:#91a0bd;--accent:#7df2c2;--accent2:#8ba7ff;
+  --danger:#ff7f9e;--gold:#ffd36a;--shadow:0 14px 40px #0008;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button{font:inherit;color:inherit;border:0}
+.app{width:100%;height:100%;min-height:100dvh;display:flex;flex-direction:column;
+  padding:max(10px,env(safe-area-inset-top)) 12px max(10px,env(safe-area-inset-bottom));
+  background:
+    radial-gradient(circle at 50% 35%,#20305c55,transparent 42%),
+    radial-gradient(circle at 15% 100%,#164d4430,transparent 35%),var(--bg)}
+.top{display:flex;align-items:center;justify-content:space-between;min-height:54px}
+.brand{font-weight:900;letter-spacing:.08em;font-size:13px;color:var(--muted)}
+.menuBtn{width:46px;height:46px;border-radius:14px;background:var(--panel);border:1px solid var(--line);font-size:22px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:2px 0 8px}
+.stat{background:#10182aee;border:1px solid var(--line);border-radius:15px;padding:9px 11px;min-width:0}
+.stat small{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.08em}
+.stat strong{display:block;font-size:19px;line-height:1.15;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.game{flex:1;display:flex;flex-direction:column;min-height:0}
+.goal{background:#10182add;border:1px solid var(--line);border-radius:14px;padding:8px 11px;margin-bottom:5px}
+.goalRow{display:flex;justify-content:space-between;gap:8px;font-size:11px;color:var(--muted)}
+.bar{height:5px;background:#202b43;border-radius:9px;overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:9px;transition:width .25s}
+.creatureArea{position:relative;flex:1;min-height:0;display:flex;align-items:center;justify-content:center}
+@media(min-width:500px){.app{max-width:430px;margin:auto;border-left:1px solid #18233a;border-right:1px solid #18233a}}

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#0b1020">
+<title>DNA Evolution Idle</title>
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/creature.css">
+<link rel="stylesheet" href="css/shop.css">
+<link rel="stylesheet" href="css/modal.css">
+</head>
+<body>
+<div class="app">
+  <header class="top"><div class="brand">DNA // EVOLUTION</div><button class="menuBtn" id="menuBtn" aria-label="Open shop">☰</button></header>
+  <section class="stats">
+    <div class="stat"><small>DNA</small><strong id="dna">0</strong></div>
+    <div class="stat"><small>DNA / sec</small><strong id="dps">0</strong></div>
+  </section>
+  <main class="game">
+    <div class="goal">
+      <div class="goalRow"><span id="goalLabel">Next mutation</span><b id="goalPct">0%</b></div>
+      <div class="bar"><i id="goalBar"></i></div>
+    </div>
+    <div class="creatureArea" id="creatureArea">
+      <div class="tapTarget" id="tapTarget" aria-label="Tap creature to generate DNA">
+        <svg id="creature" viewBox="0 0 400 400" role="img" aria-label="Your evolving creature"></svg>
+        <div class="tapHint">TAP TO EVOLVE</div>
+      </div>
+    </div>
+    <div class="partPills" id="parts"></div>
+    <div class="actions">
+      <button class="bigTap" id="tapBtn">+ DNA</button>
+      <button class="shopOpen" id="shopBtn">EVOLUTION SHOP</button>
+    </div>
+    <button class="boost" id="doubleBtn">⚡ Rewarded ad hook: 2× DNA for 15 min</button>
+  </main>
+</div>
+
+<div class="view" id="shopView">
+  <div class="viewHead"><h2>Behavior Lab</h2><button class="close" id="shopClose">×</button></div>
+  <div class="scroll" id="shopList"></div>
+</div>
+
+<div class="modal" id="evoModal">
+  <div class="modalBox">
+    <div class="eyebrow">EVOLUTION EVENT</div>
+    <h2 id="evoTitle">Something is stirring...</h2>
+    <p class="flavor" id="evoFlavor">The primordial ooze is ready to become something more.</p>
+    <div id="mutationList"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

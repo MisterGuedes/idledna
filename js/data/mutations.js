@@ -1,0 +1,22 @@
+export const MUTATIONS = [
+ {id:"stubby",slot:"legs",name:"Stubby Legs",rarity:"common",dps:1,tap:0,desc:"Round, stumpy limbs push the ooze off the floor."},
+ {id:"clawed",slot:"legs",name:"Clawed Legs",rarity:"uncommon",dps:2.5,tap:0,desc:"Sharp toe-claws give your stride a predatory edge."},
+ {id:"hooved",slot:"legs",name:"Hooved Legs",rarity:"uncommon",dps:2.5,tap:0,desc:"Sturdy hooves prepare the body for speed."},
+ {id:"insectoid",slot:"legs",name:"Insectoid Legs",rarity:"rare",dps:5,tap:0,requires:2,desc:"Six restless legs erupt from a suddenly busy silhouette."},
+ {id:"nubby",slot:"arms",name:"Nubby Arms",rarity:"common",dps:1,tap:0,desc:"Tiny grasping limbs begin to test the world."},
+ {id:"clawedArms",slot:"arms",name:"Clawed Arms",rarity:"uncommon",dps:2.5,tap:1,desc:"Hooked claws make every touch more productive."},
+ {id:"longArms",slot:"arms",name:"Long Reaching Arms",rarity:"uncommon",dps:2,tap:1,desc:"Flexible arms reach farther and pull in more DNA."},
+ {id:"spikes",slot:"back",name:"Small Spikes",rarity:"common",dps:1,tap:0,desc:"A jagged ridge rises along the developing spine."},
+ {id:"plates",slot:"back",name:"Bony Plates",rarity:"uncommon",dps:2,tap:0,desc:"Broad armor plates harden the back."},
+ {id:"hollow",slot:"back",name:"Hollow Bones",rarity:"rare",dps:1.5,tap:0,desc:"The torso thins as a lighter internal frame develops.",unlocks:"wings"},
+ {id:"wings",slot:"back",name:"Wings",rarity:"rare",dps:6,tap:0,requiresId:"hollow",desc:"Translucent wings fold against the back at rest."},
+ {id:"eyes",slot:"head",name:"Basic Eyes",rarity:"common",dps:0,tap:.5,desc:"Two simple eyes make the world suddenly visible."},
+ {id:"compound",slot:"head",name:"Compound Eyes",rarity:"uncommon",dps:0,tap:1.5,desc:"A cluster of lenses sees opportunity everywhere."},
+ {id:"antennae",slot:"head",name:"Sensory Antennae",rarity:"uncommon",dps:1,tap:.5,desc:"Curved feelers taste the chemistry of the air."},
+ {id:"fangs",slot:"mouth",name:"Small Fangs",rarity:"common",dps:0,tap:1,desc:"A first bite-sized evolutionary advantage."},
+ {id:"beak",slot:"mouth",name:"Beak",rarity:"uncommon",dps:0,tap:1.5,desc:"A hard beak replaces the soft ancestral mouth.",exclusive:"fangs"},
+ {id:"mandibles",slot:"mouth",name:"Mandibles",rarity:"rare",dps:0,tap:3,desc:"Pincer-like jaws turn every interaction into leverage."},
+ {id:"shortTail",slot:"tail",name:"Short Tail",rarity:"common",dps:.5,tap:0,desc:"A small balancing tail flicks behind the body."},
+ {id:"spikedTail",slot:"tail",name:"Spiked Tail",rarity:"uncommon",dps:2,tap:0,desc:"A reinforced tail ends in a threatening spike cluster."},
+ {id:"prehensile",slot:"tail",name:"Prehensile Tail",rarity:"rare",dps:3,tap:.5,desc:"A curled tail gains an uncanny new sense of purpose."}
+];
