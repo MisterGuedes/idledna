@@ -9,6 +9,9 @@ const $ = id => document.getElementById(id);
 let state = loadState();
 let last = performance.now();
 let tickAcc = 0;
+const OFFLINE_CAP = 8 * 60 * 60;
+let offlineEarned = 0;
+let offlineSeconds = 0;
 
 function fmt(n){
  if(!isFinite(n))return "∞";
@@ -38,7 +41,7 @@ function totals(){
  return {dps,tap,pm,tm}
 }
 function milestoneValue(){const reduction=(state.shop.metabolism||0)*.03;return Math.max(1,state.nextMilestone*(1-reduction))}
-function toast(s){const x=$("toast");if(!x)return;x.textContent=s;x.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>x.classList.remove("show"),1800)}
+function toast(s){const x=$("toast");if(!x)return;x.textContent=s;x.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>x.classList.remove("show"),2200)}
 function render(){
  const t=totals();
  $("dna").textContent=fmt(state.dna);$("dps").textContent=fmt(t.dps);
@@ -55,6 +58,21 @@ function checkMilestone(){if(state.dna>=milestoneValue())setTimeout(openEvolutio
 function tap(){const t=totals();state.dna+=t.tap;state.totalDNA+=t.tap;state.taps++;const rect=$("tapTarget").getBoundingClientRect();const x=rect.left+rect.width*(.25+Math.random()*.5),y=rect.top+rect.height*(.25+Math.random()*.4);const f=document.createElement("div");f.className="float";f.textContent="+"+fmt(t.tap);f.style.left=x+"px";f.style.top=y+"px";document.body.appendChild(f);setTimeout(()=>f.remove(),750);$("tapTarget").classList.remove("pulse");void $("tapTarget").offsetWidth;$("tapTarget").classList.add("pulse");checkMilestone();render();saveState(state)}
 function tick(now){const dt=Math.min(1,(now-last)/1000);last=now;tickAcc+=dt;const t=totals();if(t.dps>0){state.dna+=t.dps*dt;state.totalDNA+=t.dps*dt}if(tickAcc>.25){tickAcc=0;checkMilestone();render()}requestAnimationFrame(tick)}
 function showRewardedAd(onSuccess){setTimeout(()=>onSuccess?.(),0)}
+function applyOfflineProgress(){
+ const seen=Number(state.lastSeen)||Date.now();
+ const elapsed=Math.max(0,Math.min(OFFLINE_CAP,(Date.now()-seen)/1000));
+ if(elapsed<5)return;
+ const t=totals();
+ offlineSeconds=Math.floor(elapsed);offlineEarned=t.dps*elapsed;
+ if(offlineEarned>0){state.dna+=offlineEarned;state.totalDNA+=offlineEarned;saveState(state)}
+}
+function showOfflineWelcome(){
+ if(offlineEarned<=0)return;
+ const mins=Math.floor(offlineSeconds/60),hours=Math.floor(mins/60),m=mins%60;
+ const away=hours?`${hours}h ${m}m`:mins?`${mins}m`:`${offlineSeconds}s`;
+ toast(`Welcome back! ${away} away • +${fmt(offlineEarned)} DNA`);
+}
+applyOfflineProgress();
 setCreatureState(state);setShopContext(state,render,toast);setEvolutionContext(state,render,toast);
 $("tapBtn").addEventListener("click",tap);$("tapTarget").addEventListener("pointerdown",e=>{e.preventDefault();tap()});$("menuBtn").addEventListener("click",()=>$("shopView").classList.add("show"));$("shopBtn").addEventListener("click",()=>$("shopView").classList.add("show"));$("shopClose").addEventListener("click",()=>$("shopView").classList.remove("show"));$("doubleBtn").addEventListener("click",()=>showRewardedAd(()=>{state.boostUntil=Date.now()+15*60*1000;state.boostType="double";saveState(state);render();toast("DNA production doubled for 15 minutes!")}));
-render();requestAnimationFrame(tick);
+render();showOfflineWelcome();requestAnimationFrame(tick);
