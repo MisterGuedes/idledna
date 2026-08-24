@@ -18,5 +18,10 @@ export const MUTATIONS = [
  {id:"mandibles",slot:"mouth",name:"Mandibles",rarity:"rare",dps:0,tap:3,desc:"Pincer-like jaws turn every interaction into leverage."},
  {id:"shortTail",slot:"tail",name:"Short Tail",rarity:"common",dps:.5,tap:0,desc:"A small balancing tail flicks behind the body."},
  {id:"spikedTail",slot:"tail",name:"Spiked Tail",rarity:"uncommon",dps:2,tap:0,desc:"A reinforced tail ends in a threatening spike cluster."},
- {id:"prehensile",slot:"tail",name:"Prehensile Tail",rarity:"rare",dps:3,tap:.5,desc:"A curled tail gains an uncanny new sense of purpose."}
+ {id:"prehensile",slot:"tail",name:"Prehensile Tail",rarity:"rare",dps:3,tap:.5,desc:"A curled tail gains an uncanny new sense of purpose."},
+ {id:"predatorFusion",slot:"fusion",name:"Predator Fusion",rarity:"epic",dps:18,tap:8,requiresFusion:["clawed","fangs"],desc:"Claws and fangs synchronize into a perfected hunting adaptation."},
+ {id:"aerialFusion",slot:"fusion",name:"Aerial Fusion",rarity:"epic",dps:30,tap:5,requiresFusion:["wings","compound"],desc:"Wing control and compound vision create an unmatched aerial hunter."},
+ {id:"insectFusion",slot:"fusion",name:"Hive Mind",rarity:"epic",dps:25,tap:10,requiresFusion:["insectoid","antennae"],desc:"Antennae and six legs synchronize into a hyper-efficient sensory network."},
+ {id:"armoredFusion",slot:"fusion",name:"Living Fortress",rarity:"epic",dps:22,tap:4,requiresFusion:["plates","hooved"],desc:"Armor and sturdy locomotion become a single defensive organism."},
+ {id:"grapplerFusion",slot:"fusion",name:"Tethered Predator",rarity:"epic",dps:20,tap:12,requiresFusion:["longArms","prehensile"],desc:"Reaching arms and a prehensile tail turn the creature into a master grappler."}
 ];
